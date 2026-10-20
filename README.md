@@ -1,3 +1,9 @@
+> **MacDown 2 (SwiftUI + WKWebView rewrite)** lives in [`MacDownSwift/`](MacDownSwift/) — see its
+> [README](MacDownSwift/README.md) for features, screenshots and build steps. The original Objective-C app
+> below is kept for reference.
+>
+> ![MacDown 2](MacDownSwift/docs/screenshots/editor-and-preview.png)
+
 # MacDown
 
 [![](https://img.shields.io/github/release/MacDownApp/macdown.svg)](http://macdown.uranusjr.com/download/latest/)

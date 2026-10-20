@@ -1,0 +1,125 @@
+/*
+ * Pele — the page wears the diagram look.
+ * Colours and fonts come from Pele's look variables (--pele-*), injected at runtime from
+ * pele.lookCss(look). The fallbacks below are the "elevated" look, so the sheet also works alone.
+ * Shadows follow the elevated look: a tight contact shadow plus a soft ambient one.
+ */
+:root {
+  --md-bg: var(--pele-bg, #fffcf0);
+  --md-fg: var(--pele-fg, #100f0f);
+  --md-muted: var(--pele-muted, #6f6e69);
+  --md-surface: var(--pele-surface, #f2f0e5);
+  --md-surface-alt: var(--pele-surface-alt, #e6e4d9);
+  --md-border: var(--pele-border, #cecdc3);
+  --md-accent: var(--pele-accent, #205ea6);
+  --md-radius: var(--pele-radius, 10px);
+  --md-font: var(--pele-font, Roboto, "Helvetica Neue", Arial, sans-serif);
+  --md-font-heading: var(--pele-font-heading, var(--md-font));
+  --md-font-small: var(--pele-font-small, var(--md-font));
+  --md-font-mono: var(--pele-font-mono, "Roboto Mono", ui-monospace, Menlo, monospace);
+  --md-sh1: color-mix(in srgb, var(--md-fg) 14%, transparent);
+  --md-sh2: color-mix(in srgb, var(--md-fg) 9%, transparent);
+  /* A look may set its own page lift (e.g. "white": strong, stacked) and a textured surface. */
+  --md-lift: var(--pele-page-lift, 0 1px 1px var(--md-sh1), 0 6px 14px -2px var(--md-sh2));
+  --md-surface-tex: var(--pele-paper-surface, none);
+  --md-lift-hover: 0 2px 2px var(--md-sh1), 0 14px 28px -4px var(--md-sh2);
+}
+
+/* Looks with a paper grain (--pele-paper, e.g. "paper") lay it under the whole page. */
+html { background: var(--pele-paper, none) repeat, var(--md-bg); }
+body {
+  margin: 0 auto;
+  max-width: 860px;
+  padding: 36px 40px 64px;
+  background: transparent;
+  color: var(--md-fg);
+  font-family: var(--md-font);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s, color .3s;
+}
+body > *:first-child { margin-top: 0 !important; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--md-font-heading);
+  font-weight: var(--pele-title-weight, 300);
+  letter-spacing: var(--pele-heading-tracking, -.01em);
+  line-height: 1.2;
+  margin: 1.8em 0 .6em;
+}
+h1 { font-size: 2.3em; }
+h2 { font-size: 1.65em; padding-bottom: .3em; border-bottom: 1px solid color-mix(in srgb, var(--md-border) 70%, transparent); }
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.1em; font-weight: 500; }
+h5, h6 {
+  font-family: var(--md-font-small); font-size: .78em; font-weight: 700;
+  letter-spacing: .09em; text-transform: uppercase; color: var(--md-muted);
+}
+
+p, ul, ol, dl, table, pre, blockquote, figure { margin: 0 0 1.1em; }
+a { color: var(--md-accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--md-accent) 35%, transparent); }
+a:hover { border-bottom-color: var(--md-accent); }
+strong { font-weight: 700; }
+hr { border: 0; height: 1px; margin: 2.4em 0; background: color-mix(in srgb, var(--md-border) 80%, transparent); }
+img { max-width: 100%; border-radius: var(--md-radius); box-shadow: var(--md-lift); }
+
+ul, ol { padding-left: 1.6em; }
+li + li { margin-top: .25em; }
+li > input[type=checkbox] { accent-color: var(--md-accent); }
+
+/* Lifted surfaces */
+pre, table, blockquote {
+  border-radius: var(--md-radius);
+  box-shadow: var(--md-lift);
+  transition: box-shadow .25s ease;
+}
+pre:hover, table:hover, blockquote:hover { box-shadow: var(--md-lift-hover); }
+
+code, kbd, samp, code[class*="language-"], pre[class*="language-"] { font-family: var(--md-font-mono) !important; }
+code, kbd, samp { font-size: .88em; }
+:not(pre) > code {
+  padding: .12em .4em; border-radius: calc(var(--md-radius) * .5);
+  background: var(--md-surface-tex) repeat, var(--md-surface); border: 1px solid color-mix(in srgb, var(--md-border) 60%, transparent);
+}
+pre {
+  padding: 16px 18px; overflow: auto; line-height: 1.5;
+  background: var(--md-surface-tex) repeat, var(--md-surface) !important;
+  border: 1px solid color-mix(in srgb, var(--md-border) 55%, transparent);
+}
+pre > code { background: none !important; padding: 0; border: 0; font-size: .86em; text-shadow: none !important; }
+pre[class*="language-"] { margin: 0 0 1.1em; }
+
+blockquote {
+  padding: 12px 18px; color: var(--md-muted);
+  background: var(--md-surface-tex) repeat, color-mix(in srgb, var(--md-surface) 55%, var(--md-bg));
+  border-left: 3px solid var(--md-accent);
+}
+blockquote > :last-child { margin-bottom: 0; }
+
+table { margin-left: auto; margin-right: auto; background: var(--md-surface-tex) repeat, var(--md-bg); border-collapse: separate; border-spacing: 0; overflow: hidden; border: 1px solid color-mix(in srgb, var(--md-border) 70%, transparent); }
+th, td { padding: 8px 14px; border-bottom: 1px solid color-mix(in srgb, var(--md-border) 55%, transparent); }
+tr:last-child > td { border-bottom: 0; }
+th {
+  background: var(--md-surface); text-align: left;
+  font-family: var(--md-font-small); font-size: .74em; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--md-muted);
+}
+tbody tr:nth-child(even) { background: color-mix(in srgb, var(--md-surface) 35%, transparent); }
+
+/* Pele draws its own card (the look's background). */
+.pele-diagram { margin: 1.25em 0 1em; padding: 4px 0 6px; } /* the bottom padding is room for the card's shadow */
+.pele-diagram > svg { border-radius: var(--md-radius); box-shadow: var(--md-lift); }
+
+/* Footnotes in the look's small font */
+section.footnotes { font-family: var(--md-font-small); font-size: .85em; color: var(--md-muted); }
+sup a { border: 0; }
+
+/* Lucide icons from :name: shortcodes */
+.md-icon { color: var(--md-accent); }
+.md-icon.md-icon-ok { color: var(--pele-success, #66800b); }
+.md-icon.md-icon-bad { color: var(--pele-critical, #af3029); }
+
+@media print {
+  body { max-width: none; padding: 0; }
+  pre, table, blockquote, img, .pele-diagram > svg { box-shadow: none; }
+}

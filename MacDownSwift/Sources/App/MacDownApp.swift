@@ -4,6 +4,7 @@ import SwiftUI
 struct MacDownApp: App {
     init() {
         Pref.register()
+        DispatchQueue.main.async { FileAssociation.registerOnFirstLaunch() }
     }
 
     var body: some Scene {

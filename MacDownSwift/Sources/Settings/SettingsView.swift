@@ -18,9 +18,22 @@ private struct GeneralSettings: View {
     @AppStorage(Pref.syncScrolling) private var syncScrolling = true
     @AppStorage(Pref.previewOnRight) private var previewOnRight = true
     @AppStorage(Pref.showWordCount) private var showWordCount = true
+    @State private var isDefault = FileAssociation.isDefaultHandler
 
     var body: some View {
         Form {
+            LabeledContent("Markdown files") {
+                if isDefault {
+                    Text("MacDown is the default app").foregroundStyle(.secondary)
+                } else {
+                    Button("Make MacDown the Default") {
+                        Task {
+                            await FileAssociation.makeDefault()
+                            isDefault = FileAssociation.isDefaultHandler
+                        }
+                    }
+                }
+            }
             Toggle("Synchronize preview scrolling with editor", isOn: $syncScrolling)
             Picker("Preview position", selection: $previewOnRight) {
                 Text("Right of editor").tag(true)

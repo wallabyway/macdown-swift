@@ -9,8 +9,8 @@ settings:
   base:
     SWIFT_VERSION: "6.0"
     SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
-    MARKETING_VERSION: "2.0.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "2.0.1"
+    CURRENT_PROJECT_VERSION: "2"
     CODE_SIGN_IDENTITY: "-"
     CODE_SIGN_STYLE: Manual
     ENABLE_HARDENED_RUNTIME: NO
@@ -58,7 +58,7 @@ targets:
           - CFBundleTypeName: Markdown Document
             CFBundleTypeRole: Editor
             CFBundleTypeIconFile: MarkdownDocument
-            LSHandlerRank: Default
+            LSHandlerRank: Owner
             LSItemContentTypes:
               - net.daringfireball.markdown
           - CFBundleTypeName: Plain Text Document
